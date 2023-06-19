@@ -1,0 +1,87 @@
+.wdvppr-price-range {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.wdvppr-price-range .wdvppr-title {
+  width: 13.33%;
+  margin-top: -20px;
+}
+
+.wdvppr-label p {
+  margin: 0;
+}
+
+.wdvppr-price-range .wdvppr-radio-field {
+  display: block;
+}
+
+.wdvppr-hide-field {
+  display: none;
+}
+
+.wdvppr-regular-ele-width {
+  width: 20em;
+}
+
+/* switch elem CSS  */
+label.wdvppr-switch {
+  cursor: pointer;
+}
+
+label.wdvppr-switch {
+  position: relative;
+  display: inline-block;
+  width: 54px;
+  height: 22px;
+}
+
+label.wdvppr-switch input[type="checkbox"] {
+  display: none;
+}
+
+label.wdvppr-switch input:checked + .wdvppr-slider {
+  background-color: #7d74c0;
+}
+
+.wdvppr-slider {
+  border-radius: 20px;
+  /*   box-shadow: 2px 2px 30px rgb(0 0 0 / 20%); */
+}
+
+.wdvppr-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #a9a9a9ad;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input.wdvppr-checkbox:checked + .wdvppr-slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(36px);
+}
+
+.wdvppr-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 0;
+  bottom: 0px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.wdvppr-label input[type="text"] {
+  max-width: 280px;
+  width: 100%;
+}
