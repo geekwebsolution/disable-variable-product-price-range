@@ -2,14 +2,14 @@
 /*
 Plugin Name: Disable Variable Product Price Range Woocommerce
 Description: This usually looks like $100-$999. With this snippet you will be able to hide the highest price, plus add a “From: ” in front of the minimum price.
-Version: 2.2
-WC tested up to: 7.8.0
+Version: 2.3
+WC tested up to: 8.2.2
 Author: Geek Code Lab
 Author URI: https://geekcodelab.com/
 */
 if (!defined('ABSPATH')) exit;
 
-define("WDVPPR_BUILD",2.2);
+define("WDVPPR_BUILD",2.3);
 
 if(!defined("WDVPPR_PLUGIN_DIR_PATH"))
     define("WDVPPR_PLUGIN_DIR_PATH", plugin_dir_path(__FILE__));
@@ -38,6 +38,7 @@ if(!class_exists('wdvppr_disable_price_range')) {
     {
         public function __construct() {
             $plugin = plugin_basename(__FILE__);
+            add_action( 'before_woocommerce_init', array( $this,'wdvppr_before_woocommerce_init' ) );
             add_action( 'admin_enqueue_scripts', array( $this,'wdvppr_enqueue_custom_admin_style' ));
             add_action( 'wp_print_scripts', array( $this,'wdvppr_print_scripts' ) );
             add_filter( "plugin_action_links_$plugin", array( $this,'wdvppr_add_plugin_settings_link' ));
@@ -47,6 +48,15 @@ if(!class_exists('wdvppr_disable_price_range')) {
             add_action( 'admin_init', array( $this,'register_settings_callback' ));
             add_filter( 'woocommerce_available_variation', array( $this, 'rewrite_woocommerce_available_variation' ), 99, 3 );
             add_filter( 'woocommerce_reset_variations_link', array( $this, 'wdvppr_remove_reset_link' ), 20, 1 );
+        }
+
+        /**
+         * Adding HPOS woocommerce support before_woocommerce_init
+         */
+        function wdvppr_before_woocommerce_init() {
+            if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+                \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+            }
         }
 
         /**
@@ -152,8 +162,30 @@ if(!class_exists('wdvppr_disable_price_range')) {
                         break;
 
                         case "custom_text":
-                            $custom_text = $this->custom_text($product, $price, $custom_text);
-                            $prices = trim($custom_text);
+                            $updated_price = '';
+
+                            if(isset($custom_text) && !empty($custom_text)) {
+                                $min_price = wc_price( $product->get_variation_price( 'min', true ) );
+                                $updated_min_price = apply_filters( 'wdvppr_non_formatted_price', $min_price, 'min', $product );
+
+                                $max_price = wc_price( $product->get_variation_price( 'max', true ) );
+                                $updated_max_price = apply_filters( 'wdvppr_non_formatted_price', $max_price, 'max', $product );
+
+                                if ((strpos($custom_text,'{min_price}') !== false) && (strpos($custom_text,'{max_price}') !== false)) { 
+                                    if($min_price == $max_price) {  $custom_text = $price; }
+                                }
+                                
+                                $discount_percent_html = $this->wdvppr_discount_percentage($product, (int)$product->get_variation_price( 'max', true ), (int)$product->get_variation_price( 'min', true ));
+                                $search_text = [ "{min_price}", "{max_price}" ];
+                                $replace_text = [ $updated_min_price, $updated_max_price ];
+                                $updated_price = str_replace( $search_text, $replace_text, $custom_text );
+
+                                if($discount_percent_html != '')    $updated_price .= $discount_percent_html;
+                            }else{
+                                $updated_price = $price;
+                            }
+
+                            $prices = html_entity_decode(wp_unslash($updated_price));
                         break;
         
                         default:
@@ -250,37 +282,6 @@ if(!class_exists('wdvppr_disable_price_range')) {
             }
             
             return $variation_detail;
-        }
-
-        /*
-         * Custom text
-        */
-        public function custom_text( $product, $price, $custom_text ){
-            $updated_price = '';
-            
-
-            if(isset($custom_text) && !empty($custom_text)) {
-                $min_price = wc_price( $product->get_variation_price( 'min', true ) );
-                $updated_min_price = apply_filters( 'wdvppr_non_formatted_price', $min_price, 'min', $product );
-
-                $max_price = wc_price( $product->get_variation_price( 'max', true ) );
-                $updated_max_price = apply_filters( 'wdvppr_non_formatted_price', $max_price, 'max', $product );
-
-                if ((strpos($custom_text,'{min_price}') !== false) && (strpos($custom_text,'{max_price}') !== false)) { 
-                    if($min_price == $max_price) {  $custom_text = $price; }
-                }
-                
-                $discount_percent_html = $this->wdvppr_discount_percentage($product, (int)$product->get_variation_price( 'max', true ), (int)$product->get_variation_price( 'min', true ));
-                $search_text = [ "{min_price}", "{max_price}" ];
-                $replace_text = [ $updated_min_price, $updated_max_price ];
-                $updated_price = str_replace( $search_text, $replace_text, $custom_text );
-
-                if($discount_percent_html != '')    $updated_price .= $discount_percent_html;
-            }else{
-                $updated_price = $price;
-            }
-
-            return html_entity_decode(wp_unslash($updated_price));
         }
 
         /*
