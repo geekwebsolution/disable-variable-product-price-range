@@ -2,14 +2,14 @@
 /*
 Plugin Name: Disable Variable Product Price Range Woocommerce
 Description: This usually looks like $100-$999. With this snippet you will be able to hide the highest price, plus add a “From: ” in front of the minimum price.
-Version: 2.3
+Version: 2.4
 WC tested up to: 8.2.2
 Author: Geek Code Lab
 Author URI: https://geekcodelab.com/
 */
 if (!defined('ABSPATH')) exit;
 
-define("WDVPPR_BUILD",2.3);
+define("WDVPPR_BUILD",2.4);
 
 if(!defined("WDVPPR_PLUGIN_DIR_PATH"))
     define("WDVPPR_PLUGIN_DIR_PATH", plugin_dir_path(__FILE__));
