@@ -7,7 +7,7 @@ Tags: ecommerce, e-commerce, store, sales, sell, shop, cart, checkout, downloada
 Requires at least: 4.4
 Tested up to: 6.4.1
 WC tested up to: 8.2.2
-Stable tag: 2.3
+Stable tag: 2.4
 
 This usually use to display the diffrent formate price for your WooCommerce variable products.
 
@@ -92,10 +92,11 @@ e.g.
 1. disable price of single product
 
 == Changelog ==
+= 2.4 =
+* Tested up to 6.4 wordpress version.
 
 = 2.3 =
 * Added woocommerce HPOS support.
-* Tested up to 6.4 wordpress version.
 
 = 2.2 =
 * Fixed sale discount badge bug
