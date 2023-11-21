@@ -8,7 +8,7 @@
     if (wdvpprPublicObject.priceType !== "") { priceType = wdvpprPublicObject.priceType; } else { priceType = 'default'; }
 
     if (wdvpprPublicObject.wrapperClass !== "") {
-        product_wrapper = '.product.product-type-variable, ' + wdvpprPublicObject.wrapperClass;
+        product_wrapper = wdvpprPublicObject.wrapperClass;
     }
     else {
         product_wrapper = '.product.product-type-variable';
@@ -29,8 +29,6 @@
                 // Passing variation price to the function
                 $(document.body).trigger('wdvppr_show_variation_price', [variation, variationPrice, $(this), initPrice, 'show_variation']);
                 hideDefaultPrice();
-            } else {
-
             }
         }
     });
@@ -64,13 +62,13 @@
             }
         } else {
             if (wdvpprPublicObject.removePriceClass !== "") {
-                priceContainer2 = priceContainer.find('.price')
-                    .not('.related .price, .upsell .price')
+                priceContainer2 = priceContainer.find('.price, .wp-block-woocommerce-product-price')
+                    .not('.related .price, .upsell .price, .wp-block-woocommerce-related-products .wp-block-woocommerce-product-price')
                     .not(wdvpprPublicObject.removePriceClass);
             }
             else {
-                priceContainer2 = priceContainer.find('.price')
-                    .not('.related .price, .upsell .price');
+                priceContainer2 = priceContainer.find('.price, .wp-block-woocommerce-product-price')
+                .not('.related .price, .upsell .price, .wp-block-woocommerce-related-products .wp-block-woocommerce-product-price');
             }
 
             priceContainer2.fadeOut(200, function () {
@@ -94,5 +92,19 @@
                 $(product_wrapper).find('.single_variation_wrap .woocommerce-variation-price').removeClass('wdvppr-hide-default-price');
         }
     }
+
+    // Regenerate variation data
+    var quickViewClasses= '.yith-quick-view-overlay,#yith-quick-view-close,.botiga-quick-view-popup-close-button';
+
+    $(document).find( quickViewClasses ).on('click', function(event){
+        $('a[class=reset_variations]').click();
+    });
+
+    // Botiga Theme quick view overlay clicking event
+    $(document).find( '.botiga-quick-view-popup' ).on('click', function(event){
+        if (null === event.target.closest('.botiga-quick-view-popup-content-ajax')) {
+            $('a[class=reset_variations]').click();
+        }
+    })
 
 })(jQuery);
