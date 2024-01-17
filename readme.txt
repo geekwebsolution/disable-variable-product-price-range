@@ -3,13 +3,13 @@ Plugin Name: Disable Variable Product Price Range Woocommerce
 Contributors: rajkakadiya, rvadhel
 Plugin Url: https://paypal.me/rvadhel
 Author: Geek Code Lab
-Tags: ecommerce, e-commerce, store, sales, sell, shop, cart, checkout, downloadable, downloads, storefront, price, range,disable
+Tags: shop, downloadable, downloads, price, range, update, change
 Requires at least: 4.4
-Tested up to: 6.4.1
-WC tested up to: 8.2.2
-Stable tag: 2.4
+Tested up to: 6.4.2
+WC tested up to: 8.5.1
+Stable tag: 2.5
 
-This usually use to display the diffrent formate price for your WooCommerce variable products.
+This usually use to display the diffrent format price for your WooCommerce variable products.
 
 == Description ==
 THis plugin can change the price format displayed on product loop and single product page for WooCommerce variable products.
@@ -21,7 +21,7 @@ By default, WooCommerce displays a price range like $100 - $999 (lowest to the h
 
 Instead of showing the default price range **($49 - $99)**, you can choose to show **“From $49”**, or **“Upto $99”**,  or **Starts $49 to $99**. Additionally, there are two more price formats to choose from.
 
-Disable Variable Product Price Range Woocommerce plugin helps you display the variable products in a friendlier way. You will love the price formats and other well thought options of this WooCommerce show lowest variation price plugin.
+Update Variable Product Price Range Woocommerce plugin helps you display the variable products in a friendlier way. You will love the price formats and other well thought options of this WooCommerce show lowest variation price plugin.
 
 === FREE Features of this plugin ===
 
@@ -89,9 +89,14 @@ e.g.
 
 == Screenshots ==
 
-1. disable price of single product
+1. update variable product price range
+2. update variable product price range settings
 
 == Changelog ==
+= 2.5 =
+* Fixed save settings bugs.
+* Fixed admin enqueue script bugs.
+
 = 2.4 =
 * Tested up to 6.4 wordpress version.
 
