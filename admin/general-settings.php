@@ -40,7 +40,7 @@ if(isset($price_type) && ($price_type == 'min_to_max' || $price_type == 'max_to_
                 <div class="wdvppr-label wdvppr-price-type">
                     <span class="wdvppr-radio-field">
                         <input type="radio" name="wdvppr_options[wdvppr_price_type]" value="default" id="default" <?php if(isset($price_type) && $price_type == 'default'){ esc_attr_e('checked'); } ?>>
-                        <label for="default"><?php echo esc_html("Default", WDVPPR_TEXT_DOMAIN); ?> <code><del><?php echo esc_html("Reguler Price", WDVPPR_TEXT_DOMAIN); ?></del> <?php echo esc_html("From: Sale PriceFrom: Sale Price", WDVPPR_TEXT_DOMAIN); ?></code></label>
+                        <label for="default"><?php echo esc_html("Default", WDVPPR_TEXT_DOMAIN); ?> <code><del><?php echo esc_html("Reguler Price", WDVPPR_TEXT_DOMAIN); ?></del> <?php echo esc_html("From: Sale Price", WDVPPR_TEXT_DOMAIN); ?></code></label>
                     </span>
                     <span class="wdvppr-radio-field">
                         <input type="radio" name="wdvppr_options[wdvppr_price_type]" value="min" id="min" <?php if(isset($price_type) && $price_type == 'min'){ esc_attr_e('checked'); } ?>>
