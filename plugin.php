@@ -42,7 +42,6 @@ if(!class_exists('wdvppr_disable_price_range')) {
     {
         public function __construct() {
             $plugin = plugin_basename(__FILE__);
-            add_action( 'plugins_loaded', array( $this,'wdvppr_woocommerce_constructor') );
             add_action( 'before_woocommerce_init', array( $this,'wdvppr_before_woocommerce_init' ) );
             add_action( 'admin_enqueue_scripts', array( $this,'wdvppr_enqueue_custom_admin_style' ));
             add_action( 'wp_print_scripts', array( $this,'wdvppr_print_scripts' ) );
@@ -53,31 +52,6 @@ if(!class_exists('wdvppr_disable_price_range')) {
             add_action( 'admin_init', array( $this,'register_settings_callback' ));
             add_filter( 'woocommerce_available_variation', array( $this, 'rewrite_woocommerce_available_variation' ), 99, 3 );
             add_filter( 'woocommerce_reset_variations_link', array( $this, 'wdvppr_remove_reset_link' ), 20, 1 );
-        }
-
-        /**
-         * Trigger an admin notice if WooCommerce is not installed.
-         */
-        function wdvppr_install_woocommerce_admin_notice() {
-            ?>
-            <div class="error">
-                <p>
-                    <?php
-                    // translators: %s is the plugin name.
-                    echo esc_html( sprintf( __( '%s is enabled but not effective. It requires WooCommerce in order to work.', 'disable-variable-product-price-range' ), 'Disable Variable Product Price Range Woocommerce' ) );
-                    ?>
-                </p>
-            </div>
-            <?php
-        }
-
-        function wdvppr_woocommerce_constructor() {
-            // Check WooCommerce installation
-            if ( ! function_exists( 'WC' ) ) {
-                add_action( 'admin_notices', array( $this,'wdvppr_install_woocommerce_admin_notice' ) );
-                return;
-            }
-        
         }
 
         /**
