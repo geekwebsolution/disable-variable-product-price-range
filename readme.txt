@@ -94,6 +94,9 @@ e.g.
 2. update variable product price range settings
 
 == Changelog ==
+= 2.5.1 =
+* Fixed translation strings
+
 = 2.5 =
 * Fixed save settings bugs.
 * Fixed admin enqueue script bugs.
