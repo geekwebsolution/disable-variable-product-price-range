@@ -6,8 +6,9 @@ Author: Geek Code Lab
 Tags: shop, downloadable, downloads, price, range, update, change
 Requires at least: 4.4
 Tested up to: 6.4.2
-WC tested up to: 8.5.1
-Stable tag: 2.5
+WC tested up to: 8.9.0
+Requires Plugins: woocommerce
+Stable tag: 2.5.1
 
 This usually use to display the diffrent format price for your WooCommerce variable products.
 
@@ -93,6 +94,9 @@ e.g.
 2. update variable product price range settings
 
 == Changelog ==
+= 2.5.1 =
+* Fixed translation strings
+
 = 2.5 =
 * Fixed save settings bugs.
 * Fixed admin enqueue script bugs.

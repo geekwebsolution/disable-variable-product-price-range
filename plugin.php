@@ -2,15 +2,16 @@
 /*
 Plugin Name: Disable Variable Product Price Range Woocommerce
 Description: This usually looks like $100-$999. With this snippet you will be able to hide the highest price, plus add a “From: ” in front of the minimum price.
-Version: 2.5
-WC tested up to: 8.5.1
+Version: 2.5.1
+WC tested up to: 8.9.0
+Requires Plugins: woocommerce
 Author: Geek Code Lab
 Author URI: https://geekcodelab.com/
 Text Domain: disable-variable-product-price-range
 */
 if (!defined('ABSPATH')) exit;
 
-define("WDVPPR_BUILD",2.5);
+define("WDVPPR_BUILD","2.5.1");
 
 define("WDVPPR_TEXT_DOMAIN","disable-variable-product-price-range");
 
@@ -41,7 +42,6 @@ if(!class_exists('wdvppr_disable_price_range')) {
     {
         public function __construct() {
             $plugin = plugin_basename(__FILE__);
-            add_action( 'plugins_loaded', array( $this,'wdvppr_woocommerce_constructor') );
             add_action( 'before_woocommerce_init', array( $this,'wdvppr_before_woocommerce_init' ) );
             add_action( 'admin_enqueue_scripts', array( $this,'wdvppr_enqueue_custom_admin_style' ));
             add_action( 'wp_print_scripts', array( $this,'wdvppr_print_scripts' ) );
@@ -52,31 +52,6 @@ if(!class_exists('wdvppr_disable_price_range')) {
             add_action( 'admin_init', array( $this,'register_settings_callback' ));
             add_filter( 'woocommerce_available_variation', array( $this, 'rewrite_woocommerce_available_variation' ), 99, 3 );
             add_filter( 'woocommerce_reset_variations_link', array( $this, 'wdvppr_remove_reset_link' ), 20, 1 );
-        }
-
-        /**
-         * Trigger an admin notice if WooCommerce is not installed.
-         */
-        function wdvppr_install_woocommerce_admin_notice() {
-            ?>
-            <div class="error">
-                <p>
-                    <?php
-                    // translators: %s is the plugin name.
-                    echo esc_html( sprintf( __( '%s is enabled but not effective. It requires WooCommerce in order to work.' ), 'Disable Variable Product Price Range Woocommerce' ) );
-                    ?>
-                </p>
-            </div>
-            <?php
-        }
-
-        function wdvppr_woocommerce_constructor() {
-            // Check WooCommerce installation
-            if ( ! function_exists( 'WC' ) ) {
-                add_action( 'admin_notices', array( $this,'wdvppr_install_woocommerce_admin_notice' ) );
-                return;
-            }
-        
         }
 
         /**
@@ -120,10 +95,10 @@ if(!class_exists('wdvppr_disable_price_range')) {
          * Add pluign settings to plugin list page.
         */
         public function wdvppr_add_plugin_settings_link( $links ) {
-            $support_link = '<a href="https://geekcodelab.com/contact/" target="_blank" >' . __( 'Support') . '</a>';
+            $support_link = '<a href="https://geekcodelab.com/contact/" target="_blank" >' . __( 'Support', 'disable-variable-product-price-range' ) . '</a>';
             array_unshift( $links, $support_link );
         
-            $settings_link = '<a href="'. admin_url() .'admin.php?page=wdvppr-disable-price-range">' . __( 'Settings') . '</a>';
+            $settings_link = '<a href="'. admin_url() .'admin.php?page=wdvppr-disable-price-range">' . __( 'Settings', 'disable-variable-product-price-range' ) . '</a>';
             array_unshift( $links, $settings_link );
         
             return $links;
@@ -140,7 +115,7 @@ if(!class_exists('wdvppr_disable_price_range')) {
                     switch ($price_type) {
 
                         case "min":
-                            $before_min_price = ( $add_from === 'on' ) ? __('From ', 'variation-price-display') : '';
+                            $before_min_price = ( $add_from === 'on' ) ? __('From ', 'disable-variable-product-price-range') : '';
         
                             $min_price = $this->format_price( $wdvppr_sale_price, 'min', $product );
         
@@ -148,7 +123,7 @@ if(!class_exists('wdvppr_disable_price_range')) {
                         break;
         
                         case "max":    
-                            $before_max_price = ( $add_up_to === 'on' ) ? __('Up To ', 'variation-price-display') : '';
+                            $before_max_price = ( $add_up_to === 'on' ) ? __('Up To ', 'disable-variable-product-price-range') : '';
         
                             $max_price = $this->format_price( $wdvppr_sale_price, 'max', $product );
         
