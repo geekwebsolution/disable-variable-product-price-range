@@ -20,11 +20,16 @@ if(!defined("WDVPPR_PLUGIN_DIR_PATH"))
 if(!defined("WDVPPR_PLUGIN_URL"))
     define("WDVPPR_PLUGIN_URL", plugins_url().'/'.basename(dirname(__FILE__)));
 
+if (!defined("WDVPPR_PLUGIN_BASENAME"))
+define("WDVPPR_PLUGIN_BASENAME", plugin_basename(__FILE__));
+
+if (!defined("WDVPPR_PLUGIN_DIR"))
+	define("WDVPPR_PLUGIN_DIR", plugin_basename(__DIR__));
 
 
-require_once(WQOECF_PLUGIN_DIR_PATH . 'updater/updater.php');
+require_once(WDVPPR_PLUGIN_DIR_PATH . 'updater/updater.php');
 
-add_action('upgrader_process_complete', 'wqoecf_updater_activate'); // remove  transient  on plugin  update
+add_action('upgrader_process_complete', 'wdvppr_updater_activate'); // remove  transient  on plugin  update
 
 
 if(!class_exists('wdvppr_disable_price_range')) {

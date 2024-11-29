@@ -1,7 +1,7 @@
 <?php
-if (!class_exists('WQOECF_Update_Checker')) {
+if (!class_exists('WDVPPR_Update_Checker')) {
 
-    class WQOECF_Update_Checker {
+    class WDVPPR_Update_Checker {
 
         public $plugin_slug;
         public $plugin_base;
@@ -10,7 +10,7 @@ if (!class_exists('WQOECF_Update_Checker')) {
         public $get_api;
 
         public function __construct() {
-            $utility = wqoecf_updater_utility();
+            $utility = wdvppr_updater_utility();
 
             $this->plugin_base   = $utility['get_base'];
             $this->plugin_slug   = $utility['get_slug'];
@@ -57,7 +57,7 @@ if (!class_exists('WQOECF_Update_Checker')) {
                 return $transient;
             }
 
-            $transient_name = 'wqoecf_plugin_updates';
+            $transient_name = 'wdvppr_plugin_updates';
             $cached_update = $this->cache_allowed ? get_transient($transient_name) : false;
 
             if ($cached_update !== false) {
@@ -127,5 +127,5 @@ if (!class_exists('WQOECF_Update_Checker')) {
         }
     }
 
-    new WQOECF_Update_Checker();
+    new WDVPPR_Update_Checker();
 }

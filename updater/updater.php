@@ -5,13 +5,13 @@ if (!defined('ABSPATH')) exit;
 /**
  * License manager module
  */
-function wqoecf_updater_utility() {
-    $prefix = 'WQOECF_';
+function wdvppr_updater_utility() {
+    $prefix = 'WDVPPR_';
     $settings = [
         'prefix' => $prefix,
-        'get_base' => WQOECF_PLUGIN_BASENAME,
-        'get_slug' => WQOECF_PLUGIN_DIR,
-        'get_version' => WQOECF_BUILD,
+        'get_base' => WDVPPR_PLUGIN_BASENAME,
+        'get_slug' => WDVPPR_PLUGIN_DIR,
+        'get_version' => WDVPPR_BUILD,
         'get_api' => 'https://download.geekcodelab.com/',
         'license_update_class' => $prefix . 'Update_Checker'
     ];
@@ -19,13 +19,13 @@ function wqoecf_updater_utility() {
     return $settings;
 }
 
-register_activation_hook(__FILE__, 'wqoecf_updater_activate');
-function wqoecf_updater_activate() {
+register_activation_hook(__FILE__, 'wdvppr_updater_activate');
+function wdvppr_updater_activate() {
 
     // Refresh transients
     delete_site_transient('update_plugins');
-    delete_transient('wqoecf_plugin_updates');
-    delete_transient('wqoecf_plugin_auto_updates');
+    delete_transient('wdvppr_plugin_updates');
+    delete_transient('wdvppr_plugin_auto_updates');
 }
 
-require_once(WQOECF_PLUGIN_DIR_PATH . 'updater/class-update-checker.php');
+require_once(WDVPPR_PLUGIN_DIR_PATH . 'updater/class-update-checker.php');
