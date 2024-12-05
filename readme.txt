@@ -8,7 +8,7 @@ Requires at least: 4.4
 Tested up to: 6.4.2
 WC tested up to: 8.9.0
 Requires Plugins: woocommerce
-Stable tag: 2.5.1
+Stable tag: 2.6.0
 
 This usually use to display the diffrent format price for your WooCommerce variable products.
 
@@ -94,6 +94,10 @@ e.g.
 2. update variable product price range settings
 
 == Changelog ==
+= 2.6.0 =
+*Fix Bug
+*Added auto updated function
+
 = 2.5.1 =
 * Fixed translation strings
 
