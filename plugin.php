@@ -29,6 +29,8 @@ if (!defined("WDVPPR_PLUGIN_DIR"))
 
 require_once(WDVPPR_PLUGIN_DIR_PATH . 'updater/updater.php');
 
+register_activation_hook(__FILE__, 'wdvppr_updater_activate');
+
 add_action('upgrader_process_complete', 'wdvppr_updater_activate'); // remove  transient  on plugin  update
 
 

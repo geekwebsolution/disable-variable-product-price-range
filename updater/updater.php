@@ -19,7 +19,6 @@ function wdvppr_updater_utility() {
     return $settings;
 }
 
-register_activation_hook(__FILE__, 'wdvppr_updater_activate');
 function wdvppr_updater_activate() {
 
     // Refresh transients
